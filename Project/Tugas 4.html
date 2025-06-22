@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website Pribadi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Color scheme with amber/orange as primary */
+      --color-bg: #ffffff;
+      --color-text: #374151;
+      --color-primary: #d97706; /* warm amber */
+      --color-primary-hover: #b45309; /* darker amber */
+      --color-secondary: #6b7280;
+      --color-accent: #111827;
+      --color-bg-card: #f9fafb;
+      --border-radius: 0.75rem;
+      --shadow-light: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-interactive: 0 8px 16px rgba(217, 119, 6, 0.25);
+      --font-family: 'Poppins', sans-serif;
+      --transition: 0.3s ease;
+    }
+    /* Dark theme */
+    :root[data-theme='dark'] {
+      --color-bg: #1f2937;
+      --color-text: #e5e7eb;
+      --color-primary: #fbbf24; /* amber-400 */
+      --color-primary-hover: #d97706; /* amber-600 */
+      --color-secondary: #9ca3af;
+      --color-accent: #f3f4f6;
+      --color-bg-card: #374151;
+      --shadow-light: 0 4px 12px rgba(0,0,0,0.3);
+      --shadow-interactive: 0 8px 16px rgba(251, 191, 36, 0.3);
+    }
+
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-family);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header with flex layout */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--color-bg);
+      box-shadow: var(--shadow-light);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Title styling */
+    header h1 {
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: var(--color-primary);
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    /* Navigation container */
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    /* Navigation links */
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: var(--color-text);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      transition: background-color var(--transition), color var(--transition);
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: var(--color-primary);
+      color: white;
+      outline: none;
+    }
+
+    /* Dark mode toggle button */
+    #theme-toggle {
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--transition), transform var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    #theme-toggle:hover {
+      background-color: var(--color-primary-hover);
+      transform: scale(1.05);
+    }
+
+    #theme-toggle svg {
+      width: 1rem;
+      height: 1rem;
+      fill: currentColor;
+    }
+
+    /* Main content */
+    main.container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 3rem;
+      background: var(--color-bg-card);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+    }
+
+    h2 {
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    p, ul {
+      color: var(--color-secondary);
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      background: var(--color-bg-card);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-secondary);
+    }
+
+    th {
+      background-color: var(--color-primary);
+      color: white;
+    }
+
+    tr:hover {
+      background-color: rgba(217, 119, 6, 0.1);
+    }
+
+    /* Button */
+    .btn-primary {
+      display: inline-block;
+      background: var(--color-primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color var(--transition), transform var(--transition);
+      border: none;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--color-secondary);
+      margin-top: 2rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      .nav-container {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      main.container {
+        padding: 0 1rem;
+      }
+      
+      section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Website Pribadi Saya</h1>
+    <div class="nav-container">
+      <nav role="navigation" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#pendidikan">Pendidikan</a>
+        <a href="#jadwal-kuliah">Jadwal Kuliah</a>
+        <a href="#aktivitas">Aktivitas</a>
+        <a href="#informasi-lain">Informasi Lain</a>
+      </nav>
+      <button id="theme-toggle" aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/>
+        </svg>
+        <span>Mode Gelap</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home" tabindex="0" aria-label="Home section">
+      <h2>Home</h2>
+      <p>Selamat datang di website pribadi saya! Nama saya <strong>Muhammad Angga Bayu Permana</strong>, saya adalah seorang mahasiswa yang sedang menempuh pendidikan di <strong>Universitas Sains Al-Qur'an</strong>. Saya memiliki minat dalam <strong>Digital Economy</strong> dan berkomitmen untuk terus belajar dan berkembang.</p>
+    </section>
+
+    <section id="pendidikan" tabindex="0" aria-label="Pendidikan section">
+      <h2>Pendidikan</h2>
+      <p>Saya telah menempuh pendidikan di beberapa institusi, antara lain:</p>
+      <ul>
+        <li>SMA NEGERI 2 WONOSOBO - 2022</li>
+        <li>UNIVERSITAS SAINS AL-QUR'AN - 2023 hingga sekarang</li>
+        <li>Pelatihan: Front End Developer - 2023</li>
+      </ul>
+    </section>
+
+    <section id="jadwal-kuliah" tabindex="0" aria-label="Jadwal Kuliah section">
+      <h2>Jadwal Kuliah</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Hari</th>
+            <th>Mata Kuliah</th>
+            <th>Waktu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Senin</td>
+            <td>Analisis dan Desain Berorientasi Objek</td>
+            <td>15:30 - 17:00</td>
+          </tr>
+          <tr>
+            <td>Selasa</td>
+            <td>Kecerdasan Buatan</td>
+            <td>13:30 - 15:00</td>
+          </tr>
+          <tr>
+            <td>Rabu</td>
+            <td>Pemrogaman Berorientasi Objek</td>
+            <td>13:30 - 15:00</td>
+          </tr>
+          <tr>
+            <td>Kamis</td>
+            <td>Teori Bahasa dan Otomata</td>
+            <td>15:30 - 17:00</td>
+          </tr>
+          <tr>
+            <td>Jumat</td>
+            <td>Komputasi Numerik</td>
+            <td>15:30 - 17:00</td>
+          </tr>
+          <tr>
+            <td>Sabtu</td>
+            <td>Desain dan Analisis Algoritma</td>
+            <td>13:30 - 15:00</td>
+          </tr>
+          <tr>
+            <td>Sabtu</td>
+            <td>Pemrogaman WEB</td>
+            <td>15:30 - 17:00</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="aktivitas" tabindex="0" aria-label="Aktivitas section">
+      <h2>Aktivitas</h2>
+      <p>Saya aktif dalam beberapa organisasi selama kuliah, antara lain:</p>
+      <ul>
+        <li>Anggota Organisasi UI/UX - 2023</li>
+        <li>Ketua Analisis Sistem dan Basis Data - 2023</li>
+        <li>Partisipasi dalam Class of Champion Ruang Guru - 2024</li>
+      </ul>
+    </section>
+
+    <section id="informasi-lain" tabindex="0" aria-label="Informasi Lain section">
+      <h2>Informasi Lain</h2>
+      <p>Saya juga memiliki hobi di bidang <strong>Arsitek</strong>, dan saya senang berpartisipasi dalam kegiatan sosial seperti <strong>Gotong Royong</strong>. Saya percaya bahwa pengalaman di luar akademis sangat penting untuk pengembangan diri.</p>
+      <a href="#home" class="btn-primary">Mulai Sekarang</a>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2023 Muhammad Angga Bayu Permana. Semua hak dilindungi.</p>
+  </footer>
+
+  <script>
+    // Dark mode toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('svg');
+    const themeText = themeToggle.querySelector('span');
+    const html = document.documentElement;
+
+    // Check for saved theme preference
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      themeText.textContent = 'Mode Terang';
+    }
+
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeText.textContent = 'Mode Gelap';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeText.textContent = 'Mode Terang';
+      }
+    });
+  </script>
+</body>
+</html>

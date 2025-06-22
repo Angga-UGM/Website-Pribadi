@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website Pribadi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #6b7280;
+      --color-primary: #2563eb;
+      --color-primary-hover: #1e40af;
+      --color-secondary: #374151;
+      --color-accent: #111827;
+      --color-accent-hover: #222f3e;
+      --color-bg-card: #f9fafb;
+      --border-radius: 0.75rem;
+      --shadow-light: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-interactive: 0 8px 16px rgba(37, 99, 235, 0.2);
+      --font-family: 'Poppins', sans-serif;
+
+      --transition: 0.3s ease;
+    }
+    :root[data-theme='dark'] {
+      --color-bg: #1f2937;
+      --color-text: #9ca3af;
+      --color-primary: #60a5fa;
+      --color-primary-hover: #2563eb;
+      --color-secondary: #e0e7ff;
+      --color-accent: #f3f4f6;
+      --color-accent-hover: #dbeafe;
+      --color-bg-card: #374151;
+      --shadow-light: 0 4px 12px rgba(0,0,0,0.5);
+      --shadow-interactive: 0 8px 16px rgba(96, 165, 250, 0.3);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-family);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 4rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--color-bg);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1.5rem 1rem 0.5rem 1rem;
+      user-select: none;
+    }
+
+    header h1.site-title {
+      font-weight: 800;
+      font-size: 3rem;
+      color: var(--color-primary);
+      margin: 0;
+      user-select: none;
+      line-height: 1.1;
+      text-shadow: 0 1px 4px rgba(37, 99, 235, 0.15);
+      background: linear-gradient(90deg, #bfdbfe 0%, #2563eb 100%);
+      padding: 0.75rem 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+      color: white;
+      text-align: center;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      width: 100%;
+      max-width: 720px;
+      padding-bottom: 1rem;
+    }
+
+    nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--color-primary);
+      background-color: transparent;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--border-radius);
+      border: 2px solid transparent;
+      text-decoration: none;
+      transition:
+        background-color var(--transition),
+        color var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition),
+        transform var(--transition);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      box-shadow: 0 3px 6px rgba(37, 99, 235, 0.12);
+      will-change: transform, box-shadow, background-color;
+    }
+    nav a:hover,
+    nav a:focus {
+      background-color: var(--color-primary-hover);
+      color: white;
+      border-color: var(--color-primary-hover);
+      box-shadow: var(--shadow-interactive);
+      outline: none;
+      transform: translateY(-2px);
+    }
+
+    main.container {
+      max-width: 720px;
+      width: 100%;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    section {
+      background-color: var(--color-bg-card);
+      border-radius: var(--border-radius);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-light);
+      box-sizing: border-box;
+      transition: box-shadow var(--transition);
+      will-change: box-shadow;
+    }
+    section:hover,
+    section:focus-within {
+      box-shadow: var(--shadow-interactive);
+    }
+
+    section:last-child {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: 3rem;
+      color: var(--color-primary);
+      margin-top: 0;
+      margin-bottom: 1rem;
+      user-select: none;
+      line-height: 1.1;
+      text-shadow: 0 1px 2px rgba(37, 99, 235, 0.15);
+    }
+
+    p, ul {
+      font-size: 1.125rem;
+      color: var(--color-secondary);
+      margin-top: 0.5rem;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      font-size: 1.125rem;
+      color: var(--color-secondary);
+      background-color: var(--color-bg);
+      box-shadow: var(--shadow-light);
+      margin-top: 2rem;
+      transition: box-shadow var(--transition);
+      will-change: box-shadow;
+    }
+    table:hover,
+    table:focus-within {
+      box-shadow: var(--shadow-interactive);
+    }
+    thead {
+      background-color: var(--color-primary);
+      color: white;
+      user-select: none;
+    }
+    th, td {
+      padding: 1rem 1.5rem;
+      text-align: left;
+    }
+    tbody tr:nth-child(odd) {
+      background-color: var(--color-bg-card);
+    }
+    tbody tr:hover {
+      background-color: var(--color-primary-hover);
+      color: white;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--color-primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.25rem;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 6px 12px rgba(37, 99, 235, 0.5);
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 1rem;
+      text-decoration: none;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background-color: #1e40af;
+      transform: scale(1.05);
+      box-shadow: 0 8px 14px rgba(30, 64, 175, 0.8);
+      outline: none;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 2rem 1rem;
+      color: var(--color-secondary);
+      font-weight: 600;
+      user-select: none;
+    }
+
+    @media (max-width: 900px) {
+      main.container {
+        padding: 2rem 1.5rem 3rem 1.5rem;
+      }
+      h2 {
+        font-size: 2.5rem;
+      }
+      .btn-primary {
+        font-size: 1.1rem;
+        padding: 0.6rem 1.6rem;
+      }
+      th, td {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      header {
+        padding: 1rem;
+      }
+      nav {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+      nav a {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        box-shadow: none;
+      }
+      nav a:hover,
+      nav a:focus {
+        transform: none;
+        outline-offset: 0;
+        outline: none;
+        background-color: var(--color-primary);
+        color: white;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="site-title">Website Pribadi Saya</h1>
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#pendidikan">Pendidikan</a>
+      <a href="#jadwal-kuliah">Jadwal Kuliah</a>
+      <a href="#aktivitas">Aktivitas</a>
+      <a href="#informasi-lain">Informasi Lain</a>
+    </nav>
+  </header>
+
+  <main class="container" role="main">
+    <section id="home" tabindex="0" aria-label="Home section">
+      <h2>Home</h2>
+      <p>Selamat datang di website pribadi saya! Nama saya <strong>[Nama Anda]</strong>, saya adalah seorang mahasiswa yang sedang menempuh pendidikan di <strong>[Nama Universitas]</strong>. Saya memiliki minat dalam <strong>[Minat Anda]</strong> dan berkomitmen untuk terus belajar dan berkembang.</p>
+    </section>
+
+    <section id="pendidikan" tabindex="0" aria-label="Pendidikan section">
+      <h2>Pendidikan</h2>
+      <p>Saya telah menempuh pendidikan di beberapa institusi, antara lain:</p>
+      <ul>
+        <li>[Nama Sekolah Menengah] - [Tahun]</li>
+        <li>[Nama Universitas] - [Tahun Masuk] hingga sekarang</li>
+        <li>Pelatihan: [Nama Pelatihan] - [Tahun]</li>
+      </ul>
+    </section>
+
+    <section id="jadwal-kuliah" tabindex="0" aria-label="Jadwal Kuliah section">
+      <h2>Jadwal Kuliah</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Hari</th>
+            <th>Mata Kuliah</th>
+            <th>Waktu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Senin</td>
+            <td>Analisis dan Desain Berorientasi Objek</td>
+            <td>15:30 - 17:00</td>
+          </tr>
+          <tr>
+            <td>Selasa</td>
+            <td>Kecerdasan Buatan</td>
+            <td>13:30 - 15:00</td>
+          </tr>
+          <tr>
+            <td>Rabu</td>
+            <td>Pemrogaman Berorientasi Objek</td>
+            <td>13:30 - 15:00</td>
+          </tr>
+          <tr>
+            <td>Kamis</td>
+            <td>Teori Bahasa dan Otomata</td>
+            <td>15:30 - 17:00</td>
+          </tr>
+          <tr>
+            <td>Jumat</td>
+            <td>Komputasi Numerik</td>
+            <td>15:30 - 17:00</td>
+          </tr>
+          <tr>
+            <td>Sabtu</td>
+            <td>Desain dan Analisis Algoritma</td>
+            <td>13:30 - 15:00</td>
+          </tr>
+          <tr>
+            <td>Sabtu</td>
+            <td>Pemrogaman WEB</td>
+            <td>15:30 - 17:00</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="aktivitas" tabindex="0" aria-label="Aktivitas section">
+      <h2>Aktivitas</h2>
+      <p>Saya aktif dalam beberapa organisasi selama kuliah, antara lain:</p>
+      <ul>
+        <li>Anggota Organisasi UI/UX - 2023</li>
+        <li>Ketua Analisis Sistem dan Basis Data - 2023</li>
+        <li>Partisipasi dalam Class of Champion Ruang Guru - 2024</li>
+      </ul>
+    </section>
+
+    <section id="informasi-lain" tabindex="0" aria-label="Informasi Lain section">
+      <h2>Informasi Lain</h2>
+      <p>Saya juga memiliki hobi di bidang <strong>Arsitek</strong>, dan saya senang berpartisipasi dalam kegiatan sosial seperti <strong>Gotong Royong</strong>. Saya percaya bahwa pengalaman di luar akademis sangat penting untuk pengembangan diri.</p>
+      <a href="#home" class="btn-primary" aria-label="Kembali ke Home">Mulai Sekarang</a>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2023 [Nama Anda]. Semua hak dilindungi.</p>
+  </footer>
+</body>
+</html>
+
